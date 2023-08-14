@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+<head>
+  <title>회원가입</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+  <form method="post" th:if="${dto == null}">
+    <div class="form-group">
+      <label class="form-label mt-4">회원가입</label>
+      <div class="form-floating mb-3">
+        <input type="phone" name="phone" class="form-control" id="floatingInput" placeholder="01012345678">
+        <label for="floatingInput">전화번호</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="홍길동">
+        <label for="floatingInput">사용자 이름</label>
+      </div>
+      <div class="form-floating mb-4">
+        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">비밀번호</label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">가입하기</button>
+  </form>
+  <form method="post" th:unless="${dto == null}">
+    <div class="form-group">
+      <label class="form-label mt-4">회원가입</label>
+      <th:block th:if="${valid_phone == null}">
+        <div class="form-floating mb-3">
+          <input type="phone" name="phone" class="form-control" id="floatingInput">
+          <label for="floatingInput">전화번호</label>
+        </div>
+      </th:block>
+      <th:block th:unless="${valid_phone} == null">
+        <div class="form-floating mb-3 has-danger">
+          <input type="phone" name="phone" class="form-control is-invalid" id="floatingInput">
+          <label for="floatingInput">전화번호</label>
+          <div class="invalid-feedback" th:text="${valid_phone}"></div>
+        </div>
+      </th:block>
+      <th:block th:if="${valid_username == null}">
+        <div class="form-floating mb-3">
+          <input type="text" name="username" class="form-control" id="floatingUsername">
+          <label for="floatingInput">사용자 이름</label>
+        </div>
+      </th:block>
+      <th:block th:unless="${valid_username == null}">
+        <div class="form-floating mb-3 has-danger">
+          <input type="text" name="username" class="form-control is-invalid" id="floatingUsername">
+          <label for="floatingInput">사용자 이름</label>
+          <div class="invalid-feedback" th:text="${valid_username}"></div>
+        </div>
+      </th:block>
+      <div class="form-floating mb-4">
+        <input type="password" name="password" class="form-control" id="floatingPassword">
+        <label for="floatingPassword">비밀번호</label>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">가입하기</button>
+  </form>
+</div>
+</body>
+</html>
